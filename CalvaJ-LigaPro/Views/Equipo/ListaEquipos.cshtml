@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CalvaJ_LigaPro.Models.Equipo>
+
+@{
+    ViewData["Title"] = "ListaEquipos";
+}
+
+<h1>ListaEquipos</h1>
+
+<p>
+    <a class="btn btn-info"  asp-action="Create">+ Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartidosJugados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartidosGanados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartidosEmpatados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartidosPerdidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puntos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartidosJugados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartidosGanados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartidosEmpatados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartidosPerdidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Puntos)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class="btn btn-success"}) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
