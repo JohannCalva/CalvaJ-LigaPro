@@ -5,9 +5,20 @@ namespace CalvaJ_LigaPro.Repositories
 {
     public class EquipoRepository : IEquipoRepository
     {
+        public List<Equipo> Equipos;
+        public EquipoRepository()
+        {
+            InicializarEquipos();
+        }
         public bool CrearEquipo(Equipo equipo)
         {
-            throw new NotImplementedException();
+            if (Equipos == null)
+            {
+                Equipos = new List<Equipo>();
+            }
+
+            Equipos.Add(equipo);
+            return true;
         }
 
         public Equipo DevuelveInfoEquipo(int Id)
@@ -16,30 +27,29 @@ namespace CalvaJ_LigaPro.Repositories
             var equipo = equipos.Where(item => item.Id == Id).First();
             return equipo;
         }
-
-        public List<Equipo> DevuelveListadoEquipos()
+        public void InicializarEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
+
             Equipo ldu = new Equipo
             {
                 Id = 1,
-                Nombre = "Ldu",
+                Nombre = "Liga de Quito",
                 PartidosJugados = 10,
                 PartidosGanados = 10,
                 PartidosEmpatados = 0,
                 PartidosPerdidos = 0
             };
-            equipos.Add(ldu);
-            Equipo bsc = new Equipo
+
+            Equipo barcelona = new Equipo
             {
                 Id = 2,
                 Nombre = "Barcelona",
                 PartidosJugados = 10,
-                PartidosGanados = 1,
-                PartidosEmpatados = 1,
-                PartidosPerdidos = 8
+                PartidosGanados = 8,
+                PartidosEmpatados = 0,
+                PartidosPerdidos = 2
             };
-            equipos.Add(bsc);
             Equipo idv = new Equipo
             {
                 Id = 3,
@@ -49,18 +59,38 @@ namespace CalvaJ_LigaPro.Repositories
                 PartidosEmpatados = 2,
                 PartidosPerdidos = 3
             };
+            equipos.Add(ldu);
+            equipos.Add(barcelona);
             equipos.Add(idv);
-            return equipos;
+
+            Equipos = equipos;
+        }
+
+        public List<Equipo> DevuelveListadoEquipos()
+        {
+            return Equipos;
         }
 
         public bool EditarEquipo(Equipo equipo)
         {
-            throw new NotImplementedException();
+            var index = Equipos.FindIndex(e => e.Id == equipo.Id);
+            if (index != -1)
+            {
+                Equipos[index] = equipo;
+                return true;
+            }
+            return false;
         }
 
         public bool EliminarEquipo(int id)
         {
-            throw new NotImplementedException();
+            var equipo = DevuelveInfoEquipo(id);
+            if (equipo != null)
+            {
+                Equipos.Remove(equipo);
+                return true;
+            }
+            return false;
         }
     }
 }

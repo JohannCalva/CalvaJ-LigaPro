@@ -1,7 +1,12 @@
+using CalvaJ_LigaPro.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// Sugerido por ChatGPT para que se realice una unica instancia durante la ejecución del programa y no se instancie varias veces el repositorio
+builder.Services.AddSingleton<EquipoRepository>();
+
 
 var app = builder.Build();
 
