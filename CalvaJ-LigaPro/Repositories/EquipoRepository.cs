@@ -10,23 +10,8 @@ namespace CalvaJ_LigaPro.Repositories
         {
             InicializarEquipos();
         }
-        public bool CrearEquipo(Equipo equipo)
-        {
-            if (Equipos == null)
-            {
-                Equipos = new List<Equipo>();
-            }
 
-            Equipos.Add(equipo);
-            return true;
-        }
-
-        public Equipo DevuelveInfoEquipo(int Id)
-        {
-            var equipos = DevuelveListadoEquipos();
-            var equipo = equipos.Where(item => item.Id == Id).First();
-            return equipo;
-        }
+        // Inicializa la lista de equipos con equipos por defecto
         public void InicializarEquipos()
         {
             List<Equipo> equipos = new List<Equipo>();
@@ -66,9 +51,33 @@ namespace CalvaJ_LigaPro.Repositories
             Equipos = equipos;
         }
 
+        // Devuelve la lista de equipos cuando se requiere, con cambios realizados o equipos agregados
         public List<Equipo> DevuelveListadoEquipos()
         {
             return Equipos;
+        }
+
+        public bool CrearEquipo(Equipo equipo)
+        {
+            // Si la lista de equipos es nula, la inicializamos
+            if (Equipos == null)
+            {
+                Equipos = new List<Equipo>();
+            }
+
+            // Logica creada por ChatGPT para asignar un nuevo Id al equipo automaticamente desde el programa
+            int nuevoId = Equipos.Count > 0 ? Equipos.Max(e => e.Id) + 1 : 1;
+            equipo.Id = nuevoId;
+
+            Equipos.Add(equipo);
+            return true;
+        }
+
+        public Equipo DevuelveInfoEquipo(int Id)
+        {
+            var equipos = DevuelveListadoEquipos();
+            var equipo = equipos.Where(item => item.Id == Id).First();
+            return equipo;
         }
 
         public bool EditarEquipo(Equipo equipo)
