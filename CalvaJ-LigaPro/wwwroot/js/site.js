@@ -2,3 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+function mostrarAlertaPuntos(puntos) {
+    alert("Este equipo tiene " + puntos + " puntos.");
+    return true;
+}

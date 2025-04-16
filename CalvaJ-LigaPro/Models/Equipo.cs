@@ -12,9 +12,19 @@ namespace CalvaJ_LigaPro.Models
         [DisplayName("Nombre del equipo")]
         [Required]
         public string Nombre { get; set; }
+        [DisplayName("Logo")]
+        public string? Logo { get; set; }
+        public string? Descripcion { get; set; }
         [Range(0, 20)]
         [DisplayName("Partidos Jugados")]
-        public int PartidosJugados { get; set; }
+        public int PartidosJugados { 
+            get
+            {
+                int partidosJugados = PartidosGanados + PartidosEmpatados + PartidosPerdidos;
+                return partidosJugados;
+            }
+        }
+        //Para mayor practicidad y no tener que hacer diversas validaciones, los partidos jugados no podran ser ingresados por el usuario y serán la suma de los demás partidos
         [Range(0, 20)]
         [DisplayName("Partidos Ganados")]
         public int PartidosGanados { get; set; }

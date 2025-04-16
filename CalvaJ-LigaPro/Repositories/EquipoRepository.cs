@@ -20,7 +20,8 @@ namespace CalvaJ_LigaPro.Repositories
             {
                 Id = 1,
                 Nombre = "Liga de Quito",
-                PartidosJugados = 10,
+                Logo = "~/images/logoLdu.svg",
+                Descripcion = "Actual campeón de la LigaPro",
                 PartidosGanados = 10,
                 PartidosEmpatados = 0,
                 PartidosPerdidos = 0
@@ -30,7 +31,8 @@ namespace CalvaJ_LigaPro.Repositories
             {
                 Id = 2,
                 Nombre = "Barcelona",
-                PartidosJugados = 10,
+                Logo = "~/images/logoBsc.png",
+                Descripcion = "El equipo con mas campeonatos locales de Ecuador",
                 PartidosGanados = 8,
                 PartidosEmpatados = 0,
                 PartidosPerdidos = 2
@@ -39,7 +41,8 @@ namespace CalvaJ_LigaPro.Repositories
             {
                 Id = 3,
                 Nombre = "Independiente del Valle",
-                PartidosJugados = 10,
+                Logo = "~/images/logoIdv.png",
+                Descripcion = "El equipo que ha dado la sorpresa en los ultimos años",
                 PartidosGanados = 5,
                 PartidosEmpatados = 2,
                 PartidosPerdidos = 3
@@ -54,8 +57,16 @@ namespace CalvaJ_LigaPro.Repositories
         // Devuelve la lista de equipos cuando se requiere, con cambios realizados o equipos agregados
         public List<Equipo> DevuelveListadoEquipos()
         {
+            Equipos = OrdenaEquiposPorPuntos();
             return Equipos;
         }
+
+        public List<Equipo> OrdenaEquiposPorPuntos()
+        {
+            return Equipos.OrderByDescending(e => e.Puntos).ToList();
+        }
+
+
 
         public bool CrearEquipo(Equipo equipo)
         {
